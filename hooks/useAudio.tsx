@@ -26,13 +26,12 @@ interface AudioContextValue {
 const AudioContext = createContext<AudioContextValue | null>(null);
 
 export function AudioProvider({ children }: { children: ReactNode }) {
-  const [howl, setHowl] = useState<Howl | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
 
   const { musicPath, volume, loop } = siteContent.audio;
 
-  useEffect(() => {
+  const howl = useMemo(() => {
     const sound = new Howl({
       src: [musicPath],
       volume,
@@ -47,24 +46,24 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       },
       onmute: () => setIsMuted(sound.mute()),
     });
-
-    setHowl(sound);
-
-    return () => {
-      sound.unload();
-    };
+    return sound;
   }, [musicPath, volume, loop]);
 
+  useEffect(() => {
+    return () => {
+      howl.unload();
+    };
+  }, [howl]);
+
   const play = useCallback(() => {
-    howl?.play();
+    howl.play();
   }, [howl]);
 
   const pause = useCallback(() => {
-    howl?.pause();
+    howl.pause();
   }, [howl]);
 
   const toggle = useCallback(() => {
-    if (!howl) return;
     if (howl.playing()) {
       howl.pause();
     } else {
@@ -73,15 +72,14 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   }, [howl]);
 
   const mute = useCallback(() => {
-    howl?.mute(true);
+    howl.mute(true);
   }, [howl]);
 
   const unmute = useCallback(() => {
-    howl?.mute(false);
+    howl.mute(false);
   }, [howl]);
 
   const toggleMute = useCallback(() => {
-    if (!howl) return;
     howl.mute(!howl.mute());
   }, [howl]);
 

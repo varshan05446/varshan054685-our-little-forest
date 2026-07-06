@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { seededRandom } from "@/lib/random";
 
 interface BloomBurstProps {
   active: boolean;
@@ -21,22 +22,31 @@ interface Particle {
   duration: number;
 }
 
+function createParticles(count: number): Particle[] {
+  return Array.from({ length: count }).map((_, i) => {
+    const r1 = seededRandom(i + 1);
+    const r2 = seededRandom(i + 1001);
+    const r3 = seededRandom(i + 2001);
+    const r4 = seededRandom(i + 3001);
+    const r5 = seededRandom(i + 4001);
+    return {
+      id: i,
+      emoji: EMOJIS[Math.floor(r1 * EMOJIS.length)],
+      x: (r2 - 0.5) * 600,
+      y: (r3 - 0.5) * 600,
+      scale: 0.6 + r4,
+      rotation: r5 * 360,
+      delay: r1 * 0.3,
+      duration: 1.5 + r2 * 1.5,
+    };
+  });
+}
+
 /**
  * A gentle explosion of flowers, leaves, and sparkles.
  */
 export function BloomBurst({ active, count = 40 }: BloomBurstProps) {
-  const particles = useMemo<Particle[]>(() => {
-    return Array.from({ length: count }).map((_, i) => ({
-      id: i,
-      emoji: EMOJIS[Math.floor(Math.random() * EMOJIS.length)],
-      x: (Math.random() - 0.5) * 600,
-      y: (Math.random() - 0.5) * 600,
-      scale: 0.6 + Math.random() * 1,
-      rotation: Math.random() * 360,
-      delay: Math.random() * 0.3,
-      duration: 1.5 + Math.random() * 1.5,
-    }));
-  }, [count]);
+  const particles = useMemo(() => createParticles(count), [count]);
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[70] flex items-center justify-center overflow-hidden">

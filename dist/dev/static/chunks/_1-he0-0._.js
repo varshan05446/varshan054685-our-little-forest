@@ -279,12 +279,11 @@ var _s = __turbopack_context__.k.signature(), _s1 = __turbopack_context__.k.sign
 const AudioContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createContext"])(null);
 function AudioProvider({ children }) {
     _s();
-    const [howl, setHowl] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [isPlaying, setIsPlaying] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [isMuted, setIsMuted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const { musicPath, volume, loop } = __TURBOPACK__imported__module__$5b$project$5d2f$config$2f$site$2d$content$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["siteContent"].audio;
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
-        "AudioProvider.useEffect": ()=>{
+    const howl = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "AudioProvider.useMemo[howl]": ()=>{
             const sound = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$howler$2f$dist$2f$howler$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Howl"]({
                 src: [
                     musicPath
@@ -294,52 +293,57 @@ function AudioProvider({ children }) {
                 html5: true,
                 preload: true,
                 onplay: {
-                    "AudioProvider.useEffect": ()=>setIsPlaying(true)
-                }["AudioProvider.useEffect"],
+                    "AudioProvider.useMemo[howl]": ()=>setIsPlaying(true)
+                }["AudioProvider.useMemo[howl]"],
                 onpause: {
-                    "AudioProvider.useEffect": ()=>setIsPlaying(false)
-                }["AudioProvider.useEffect"],
+                    "AudioProvider.useMemo[howl]": ()=>setIsPlaying(false)
+                }["AudioProvider.useMemo[howl]"],
                 onstop: {
-                    "AudioProvider.useEffect": ()=>setIsPlaying(false)
-                }["AudioProvider.useEffect"],
+                    "AudioProvider.useMemo[howl]": ()=>setIsPlaying(false)
+                }["AudioProvider.useMemo[howl]"],
                 onend: {
-                    "AudioProvider.useEffect": ()=>{
+                    "AudioProvider.useMemo[howl]": ()=>{
                         if (!loop) setIsPlaying(false);
                     }
-                }["AudioProvider.useEffect"],
+                }["AudioProvider.useMemo[howl]"],
                 onmute: {
-                    "AudioProvider.useEffect": ()=>setIsMuted(sound.mute())
-                }["AudioProvider.useEffect"]
+                    "AudioProvider.useMemo[howl]": ()=>setIsMuted(sound.mute())
+                }["AudioProvider.useMemo[howl]"]
             });
-            setHowl(sound);
-            return ({
-                "AudioProvider.useEffect": ()=>{
-                    sound.unload();
-                }
-            })["AudioProvider.useEffect"];
+            return sound;
         }
-    }["AudioProvider.useEffect"], [
+    }["AudioProvider.useMemo[howl]"], [
         musicPath,
         volume,
         loop
     ]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "AudioProvider.useEffect": ()=>{
+            return ({
+                "AudioProvider.useEffect": ()=>{
+                    howl.unload();
+                }
+            })["AudioProvider.useEffect"];
+        }
+    }["AudioProvider.useEffect"], [
+        howl
+    ]);
     const play = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "AudioProvider.useCallback[play]": ()=>{
-            howl?.play();
+            howl.play();
         }
     }["AudioProvider.useCallback[play]"], [
         howl
     ]);
     const pause = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "AudioProvider.useCallback[pause]": ()=>{
-            howl?.pause();
+            howl.pause();
         }
     }["AudioProvider.useCallback[pause]"], [
         howl
     ]);
     const toggle = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "AudioProvider.useCallback[toggle]": ()=>{
-            if (!howl) return;
             if (howl.playing()) {
                 howl.pause();
             } else {
@@ -351,21 +355,20 @@ function AudioProvider({ children }) {
     ]);
     const mute = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "AudioProvider.useCallback[mute]": ()=>{
-            howl?.mute(true);
+            howl.mute(true);
         }
     }["AudioProvider.useCallback[mute]"], [
         howl
     ]);
     const unmute = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "AudioProvider.useCallback[unmute]": ()=>{
-            howl?.mute(false);
+            howl.mute(false);
         }
     }["AudioProvider.useCallback[unmute]"], [
         howl
     ]);
     const toggleMute = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "AudioProvider.useCallback[toggleMute]": ()=>{
-            if (!howl) return;
             howl.mute(!howl.mute());
         }
     }["AudioProvider.useCallback[toggleMute]"], [
@@ -397,11 +400,11 @@ function AudioProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/hooks/useAudio.tsx",
-        lineNumber: 102,
+        lineNumber: 100,
         columnNumber: 10
     }, this);
 }
-_s(AudioProvider, "a2IO4e32Pr0Gm6+WzHcv7DLHSOk=");
+_s(AudioProvider, "Bwyj2sybY89xkch3a9q4ieodISY=");
 _c = AudioProvider;
 function useAudio() {
     _s1();
@@ -431,17 +434,19 @@ var _s = __turbopack_context__.k.signature();
 "use client";
 ;
 ;
+function getInitialReducedMotion() {
+    if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+    ;
+    if (!__TURBOPACK__imported__module__$5b$project$5d2f$config$2f$site$2d$content$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["siteContent"].animation.reducedMotionFallback) return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
 function useReducedMotion() {
     _s();
-    const [reduced, setReduced] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [reduced, setReduced] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(getInitialReducedMotion);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "useReducedMotion.useEffect": ()=>{
-            if (!__TURBOPACK__imported__module__$5b$project$5d2f$config$2f$site$2d$content$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["siteContent"].animation.reducedMotionFallback) {
-                setReduced(false);
-                return;
-            }
+            if (!__TURBOPACK__imported__module__$5b$project$5d2f$config$2f$site$2d$content$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["siteContent"].animation.reducedMotionFallback) return;
             const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-            setReduced(mediaQuery.matches);
             const handler = {
                 "useReducedMotion.useEffect.handler": (event)=>setReduced(event.matches)
             }["useReducedMotion.useEffect.handler"];
@@ -453,7 +458,7 @@ function useReducedMotion() {
     }["useReducedMotion.useEffect"], []);
     return reduced;
 }
-_s(useReducedMotion, "PAG4zvF6+IsK2eHB7xTPE8NJ12w=");
+_s(useReducedMotion, "zem4ed7h+cWoCz/QMY4lJzpug+Q=");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
@@ -484,12 +489,11 @@ const LenisContext = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
 function LenisProvider({ children }) {
     _s();
     const reducedMotion = (0, __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useReducedMotion$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useReducedMotion"])();
-    const lenisRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
-    const [, setReady] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [lenis, setLenis] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "LenisProvider.useEffect": ()=>{
             if (reducedMotion) return;
-            const lenis = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lenis$2f$dist$2f$lenis$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]({
+            const instance = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lenis$2f$dist$2f$lenis$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]({
                 duration: 1.2,
                 easing: {
                     "LenisProvider.useEffect": (t)=>Math.min(1, 1.001 - Math.pow(2, -10 * t))
@@ -497,17 +501,17 @@ function LenisProvider({ children }) {
                 smoothWheel: true,
                 touchMultiplier: 1.5
             });
-            lenisRef.current = lenis;
-            setReady(true);
+            setLenis(instance);
+            let rafId;
             function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
+                instance.raf(time);
+                rafId = requestAnimationFrame(raf);
             }
-            requestAnimationFrame(raf);
+            rafId = requestAnimationFrame(raf);
             return ({
                 "LenisProvider.useEffect": ()=>{
-                    lenis.destroy();
-                    lenisRef.current = null;
+                    cancelAnimationFrame(rafId);
+                    instance.destroy();
                 }
             })["LenisProvider.useEffect"];
         }
@@ -515,7 +519,6 @@ function LenisProvider({ children }) {
         reducedMotion
     ]);
     const scrollTo = (target, options)=>{
-        const lenis = lenisRef.current;
         if (lenis) {
             lenis.scrollTo(target, options);
         } else {
@@ -539,17 +542,17 @@ function LenisProvider({ children }) {
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(LenisContext.Provider, {
         value: {
-            lenis: lenisRef.current,
+            lenis,
             scrollTo
         },
         children: children
     }, void 0, false, {
         fileName: "[project]/hooks/useLenis.tsx",
-        lineNumber: 72,
+        lineNumber: 69,
         columnNumber: 5
     }, this);
 }
-_s(LenisProvider, "sZ+jG2VMtIJo7UmESAq4alJ9sIU=", false, function() {
+_s(LenisProvider, "YOp3w6mKRIrii/2LvaeHlMtS4Pw=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useReducedMotion$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useReducedMotion"]
     ];

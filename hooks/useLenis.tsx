@@ -4,7 +4,6 @@ import {
   createContext,
   useContext,
   useEffect,
-  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -23,36 +22,34 @@ const LenisContext = createContext<LenisContextValue>({
 
 export function LenisProvider({ children }: { children: ReactNode }) {
   const reducedMotion = useReducedMotion();
-  const lenisRef = useRef<Lenis | null>(null);
-  const [, setReady] = useState(false);
+  const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
     if (reducedMotion) return;
 
-    const lenis = new Lenis({
+    const instance = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 1.5,
     });
 
-    lenisRef.current = lenis;
-    setReady(true);
+    setLenis(instance);
 
+    let rafId: number;
     function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+      instance.raf(time);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
-      lenis.destroy();
-      lenisRef.current = null;
+      cancelAnimationFrame(rafId);
+      instance.destroy();
     };
   }, [reducedMotion]);
 
   const scrollTo = (target: string | number | HTMLElement, options?: Record<string, unknown>) => {
-    const lenis = lenisRef.current;
     if (lenis) {
       lenis.scrollTo(target as never, options);
     } else {
@@ -69,7 +66,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <LenisContext.Provider value={{ lenis: lenisRef.current, scrollTo }}>
+    <LenisContext.Provider value={{ lenis, scrollTo }}>
       {children}
     </LenisContext.Provider>
   );
