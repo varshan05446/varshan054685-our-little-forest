@@ -16,6 +16,12 @@ interface TimelineCardProps {
  */
 export function TimelineCard({ date, title, caption, image, index }: TimelineCardProps) {
   const isEven = index % 2 === 0;
+  const justifyClass = isEven
+    ? "justify-center md:justify-start"
+    : "justify-center md:justify-end";
+  const cardClass = isEven
+    ? "md:mr-auto md:pr-8"
+    : "md:ml-auto md:pl-8";
 
   return (
     <motion.div
@@ -23,16 +29,14 @@ export function TimelineCard({ date, title, caption, image, index }: TimelineCar
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, delay: index * 0.1 }}
-      className={`relative flex w-full items-center justify-center md:justify-${isEven ? "start" : "end"}`}
+      className={`relative flex w-full items-center ${justifyClass}`}
     >
       {/* Timeline dot */}
       <div className="absolute left-1/2 top-0 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-cream bg-accent shadow-[0_0_12px_rgba(246,196,106,0.6)]" />
 
       {/* Card content */}
       <div
-        className={`w-[85%] max-w-sm rounded-2xl border border-warm-brown/10 bg-paper/90 p-5 shadow-xl backdrop-blur-sm md:w-[45%] ${
-          isEven ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"
-        }`}
+        className={`w-[85%] max-w-sm rounded-2xl border border-warm-brown/10 bg-paper/90 p-5 shadow-xl backdrop-blur-sm md:w-[45%] ${cardClass}`}
       >
         <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-xl bg-warm-brown/10">
           <Image

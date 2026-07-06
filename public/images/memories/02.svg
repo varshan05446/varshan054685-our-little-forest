@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300">
+    <rect width="400" height="300" fill="#7a5230"/>
+    <circle cx="200" cy="150" r="66" fill="#8da399" opacity="0.2"/>
+    <text x="200" y="160" font-family="serif" font-size="28" fill="#8da399" text-anchor="middle">Memory 2</text>
+  </svg>
