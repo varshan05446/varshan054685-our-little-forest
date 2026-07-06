@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { seededRandom } from "@/lib/random";
 import { siteContent } from "@/config/site-content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -26,14 +27,19 @@ export function FloatingLanterns({ count = 10, className = "" }: FloatingLantern
   const activeCount = reducedMotion ? Math.min(4, count) : count;
 
   const lanterns = useMemo<Lantern[]>(() => {
-    return Array.from({ length: activeCount }).map((_, i) => ({
-      id: i,
-      left: 10 + Math.random() * 80,
-      size: 16 + Math.random() * 24,
-      delay: Math.random() * 6,
-      duration: 12 + Math.random() * 10,
-      color: Math.random() > 0.5 ? "#f6c46a" : "#e8a87c",
-    }));
+    return Array.from({ length: activeCount }).map((_, i) => {
+      const r1 = seededRandom(i + 1);
+      const r2 = seededRandom(i + 1001);
+      const r3 = seededRandom(i + 2001);
+      return {
+        id: i,
+        left: 10 + r1 * 80,
+        size: 16 + r2 * 24,
+        delay: r3 * 6,
+        duration: 12 + r1 * 10,
+        color: r2 > 0.5 ? "#f6c46a" : "#e8a87c",
+      };
+    });
   }, [activeCount]);
 
   if (!siteContent.animation.enableParticles) return null;

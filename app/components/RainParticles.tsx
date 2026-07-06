@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { seededRandom } from "@/lib/random";
 import { siteContent } from "@/config/site-content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -27,15 +28,20 @@ export function RainParticles({ count = 48, className = "" }: RainParticlesProps
   const activeCount = reducedMotion ? Math.min(12, count) : count;
 
   const drops = useMemo<Drop[]>(() => {
-    return Array.from({ length: activeCount }).map((_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      width: 1 + Math.random() * 1.5,
-      height: 12 + Math.random() * 24,
-      delay: Math.random() * 3,
-      duration: 0.8 + Math.random() * 0.6,
-      opacity: 0.2 + Math.random() * 0.3,
-    }));
+    return Array.from({ length: activeCount }).map((_, i) => {
+      const r1 = seededRandom(i + 1);
+      const r2 = seededRandom(i + 1001);
+      const r3 = seededRandom(i + 2001);
+      return {
+        id: i,
+        left: r1 * 100,
+        width: 1 + r2 * 1.5,
+        height: 12 + r3 * 24,
+        delay: r1 * 3,
+        duration: 0.8 + r2 * 0.6,
+        opacity: 0.2 + r3 * 0.3,
+      };
+    });
   }, [activeCount]);
 
   if (!siteContent.animation.enableParticles) return null;

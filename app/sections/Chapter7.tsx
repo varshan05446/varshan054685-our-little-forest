@@ -21,7 +21,6 @@ export function Chapter7() {
               key={index}
               title={reason.title}
               note={reason.note}
-              index={index}
             />
           ))}
         </div>

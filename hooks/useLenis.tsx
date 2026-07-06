@@ -34,6 +34,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       touchMultiplier: 1.5,
     });
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Lenis must be created in an effect because it touches the window/RAF.
     setLenis(instance);
 
     let rafId: number;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { seededRandom } from "@/lib/random";
 import { siteContent } from "@/config/site-content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -29,15 +30,21 @@ export function FallingLeaves({ count = 16, className = "" }: FallingLeavesProps
   const activeCount = reducedMotion ? 0 : count;
 
   const leaves = useMemo<Leaf[]>(() => {
-    return Array.from({ length: activeCount }).map((_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      size: 8 + Math.random() * 14,
-      color: LEAF_COLORS[Math.floor(Math.random() * LEAF_COLORS.length)],
-      delay: Math.random() * 8,
-      duration: 7 + Math.random() * 10,
-      blur: Math.random() > 0.7 ? 1 : 0,
-    }));
+    return Array.from({ length: activeCount }).map((_, i) => {
+      const r1 = seededRandom(i + 1);
+      const r2 = seededRandom(i + 1001);
+      const r3 = seededRandom(i + 2001);
+      const r4 = seededRandom(i + 3001);
+      return {
+        id: i,
+        left: r1 * 100,
+        size: 8 + r2 * 14,
+        color: LEAF_COLORS[Math.floor(r3 * LEAF_COLORS.length)],
+        delay: r4 * 8,
+        duration: 7 + r1 * 10,
+        blur: r2 > 0.7 ? 1 : 0,
+      };
+    });
   }, [activeCount]);
 
   if (!siteContent.animation.enableParticles || leaves.length === 0) return null;

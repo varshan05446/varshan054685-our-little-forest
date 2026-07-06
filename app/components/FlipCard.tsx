@@ -6,13 +6,12 @@ import { motion } from "framer-motion";
 interface FlipCardProps {
   title: string;
   note: string;
-  index?: number;
 }
 
 /**
  * A tap-to-flip card with a 3D paper feel.
  */
-export function FlipCard({ title, note, index = 0 }: FlipCardProps) {
+export function FlipCard({ title, note }: FlipCardProps) {
   const [flipped, setFlipped] = useState(false);
 
   return (

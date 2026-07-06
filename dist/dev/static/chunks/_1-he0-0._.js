@@ -501,6 +501,7 @@ function LenisProvider({ children }) {
                 smoothWheel: true,
                 touchMultiplier: 1.5
             });
+            // eslint-disable-next-line react-hooks/set-state-in-effect -- Lenis must be created in an effect because it touches the window/RAF.
             setLenis(instance);
             let rafId;
             function raf(time) {
@@ -548,7 +549,7 @@ function LenisProvider({ children }) {
         children: children
     }, void 0, false, {
         fileName: "[project]/hooks/useLenis.tsx",
-        lineNumber: 69,
+        lineNumber: 70,
         columnNumber: 5
     }, this);
 }

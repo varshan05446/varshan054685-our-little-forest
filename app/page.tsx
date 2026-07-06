@@ -1,17 +1,21 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Opening } from "./sections/Opening";
-import { Chapter1 } from "./sections/Chapter1";
-import { Chapter2 } from "./sections/Chapter2";
-import { Chapter3 } from "./sections/Chapter3";
-import { Chapter4 } from "./sections/Chapter4";
-import { Chapter5 } from "./sections/Chapter5";
-import { Chapter6 } from "./sections/Chapter6";
-import { Chapter7 } from "./sections/Chapter7";
-import { Chapter8 } from "./sections/Chapter8";
-import { FinalPage } from "./sections/FinalPage";
 import { AudioControls } from "./components/AudioControls";
 import { ScrollProgress } from "./components/ScrollProgress";
+
+// Code-split the story chapters so the initial bundle stays light.
+// Each section is still rendered at build time for SEO and first paint.
+const Chapter1 = dynamic(() => import("./sections/Chapter1").then((m) => m.Chapter1));
+const Chapter2 = dynamic(() => import("./sections/Chapter2").then((m) => m.Chapter2));
+const Chapter3 = dynamic(() => import("./sections/Chapter3").then((m) => m.Chapter3));
+const Chapter4 = dynamic(() => import("./sections/Chapter4").then((m) => m.Chapter4));
+const Chapter5 = dynamic(() => import("./sections/Chapter5").then((m) => m.Chapter5));
+const Chapter6 = dynamic(() => import("./sections/Chapter6").then((m) => m.Chapter6));
+const Chapter7 = dynamic(() => import("./sections/Chapter7").then((m) => m.Chapter7));
+const Chapter8 = dynamic(() => import("./sections/Chapter8").then((m) => m.Chapter8));
+const FinalPage = dynamic(() => import("./sections/FinalPage").then((m) => m.FinalPage));
 
 /**
  * The full storybook experience, assembled in order.

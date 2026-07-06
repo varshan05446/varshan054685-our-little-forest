@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { seededRandom } from "@/lib/random";
 import { siteContent } from "@/config/site-content";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
@@ -26,14 +27,19 @@ export function StarField({ count = 64, className = "" }: StarFieldProps) {
   const activeCount = reducedMotion ? Math.min(16, count) : count;
 
   const stars = useMemo<Star[]>(() => {
-    return Array.from({ length: activeCount }).map((_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      top: Math.random() * 80,
-      size: 1 + Math.random() * 2.5,
-      delay: Math.random() * 4,
-      duration: 2 + Math.random() * 3,
-    }));
+    return Array.from({ length: activeCount }).map((_, i) => {
+      const r1 = seededRandom(i + 1);
+      const r2 = seededRandom(i + 1001);
+      const r3 = seededRandom(i + 2001);
+      return {
+        id: i,
+        left: r1 * 100,
+        top: r2 * 80,
+        size: 1 + r3 * 2.5,
+        delay: r1 * 4,
+        duration: 2 + r2 * 3,
+      };
+    });
   }, [activeCount]);
 
   if (!siteContent.animation.enableParticles) return null;
