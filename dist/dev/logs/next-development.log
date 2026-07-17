@@ -1,3 +1,15 @@
-{"timestamp":"00:00:02.128","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:00:15.876","source":"Server","level":"LOG","message":"○ Compiling / ..."}
-{"timestamp":"00:00:21.259","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
+{"timestamp":"00:00:02.675","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:07.694","source":"Server","level":"LOG","message":"○ Compiling / ..."}
+{"timestamp":"00:00:14.195","source":"Browser","level":"WARN","message":"HTML5 Audio pool exhausted, returning potentially locked audio object."}
+{"timestamp":"00:00:14.195","source":"Browser","level":"WARN","message":"HTML5 Audio pool exhausted, returning potentially locked audio object."}
+{"timestamp":"00:00:14.395","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33mHTML5 Audio pool exhausted, returning potentially locked audio object.\\u001b[39m\""}
+{"timestamp":"00:00:14.396","source":"Browser","level":"WARN","message":"\u001b[33mHTML5 Audio pool exhausted, returning potentially locked audio object.\u001b[39m"}
+{"timestamp":"00:00:14.401","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33mHTML5 Audio pool exhausted, returning potentially locked audio object.\\u001b[39m\""}
+{"timestamp":"00:00:14.403","source":"Browser","level":"WARN","message":"\u001b[33mHTML5 Audio pool exhausted, returning potentially locked audio object.\u001b[39m"}
+{"timestamp":"00:01:03.375","source":"Browser","level":"WARN","message":"HTML5 Audio pool exhausted, returning potentially locked audio object."}
+{"timestamp":"00:01:03.375","source":"Browser","level":"WARN","message":"HTML5 Audio pool exhausted, returning potentially locked audio object."}
+{"timestamp":"00:01:03.386","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33mHTML5 Audio pool exhausted, returning potentially locked audio object.\\u001b[39m\""}
+{"timestamp":"00:01:03.388","source":"Browser","level":"WARN","message":"\u001b[33mHTML5 Audio pool exhausted, returning potentially locked audio object.\u001b[39m"}
+{"timestamp":"00:01:03.392","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33mHTML5 Audio pool exhausted, returning potentially locked audio object.\\u001b[39m\""}
+{"timestamp":"00:01:03.393","source":"Browser","level":"WARN","message":"\u001b[33mHTML5 Audio pool exhausted, returning potentially locked audio object.\u001b[39m"}
+{"timestamp":"00:09:43.518","source":"Server","level":"LOG","message":"✓ Compiled in 3.9s"}

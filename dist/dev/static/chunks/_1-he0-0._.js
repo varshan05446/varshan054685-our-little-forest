@@ -36,7 +36,7 @@ const siteContent = {
         night: "#0f0b14"
     },
     /** Audio settings */ audio: {
-        musicPath: "/music/placeholder-piano.wav",
+        musicPath: "/music/Nanbiye-MassTamilan.io (mp3cut.net).mp3.mpeg",
         autoplay: false,
         volume: 0.2,
         loop: true,
